@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MauiEmpleados.ViewModels"
+             x:Class="MauiEmpleados.Views.EmpleadoDetailPage"
+             x:DataType="viewmodels:EmpleadoDetailViewModel"
+             Title="Ficha del Empleado"
+             >
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Border StrokeShape="RoundRectangle 80" 
+                    HeightRequest="160" WidthRequest="160" 
+                    >
+                <Image Source="{Binding Empleado.ImagenUri}" 
+                       Aspect="AspectFill"
+                       HeightRequest="150" WidthRequest="150" />
+            </Border>
+
+            <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Label Text="{Binding Empleado.Nombre}" FontSize="24" FontAttributes="Bold"  HorizontalOptions="Center"/>
+                <Label Text="{Binding Empleado.Apellido}" FontSize="20"  HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto" ColumnSpacing="15" RowSpacing="15">
+
+                <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                    <Label Text="GÉNERO" FontSize="12"  FontAttributes="Bold"/>
+                    <Label Text="{Binding Empleado.Genero}" FontSize="16" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="0" Grid.Column="1">
+                    <Label Text="EDAD" FontSize="12"  FontAttributes="Bold"/>
+                    <Label Text="{Binding Empleado.Edad, StringFormat='{0} años'}" FontSize="16" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="1" Grid.Column="0">
+                    <Label Text="DEPARTAMENTO" FontSize="12"  FontAttributes="Bold"/>
+                    <Label Text="{Binding Empleado.DepartamentoId, StringFormat='Área {0}'}" FontSize="16" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="1" Grid.Column="1">
+                    <Label Text="ID EMPLEADO" FontSize="12"  FontAttributes="Bold"/>
+                    <Label Text="{Binding Empleado.Id}" FontSize="16"/>
+                </VerticalStackLayout>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MauiEmpleados.Models"
+             xmlns:viewmodels="clr-namespace:MauiEmpleados.ViewModels"
+             x:Class="MauiEmpleados.Views.SedesPage"
+             x:DataType="viewmodels:SedesViewModel"
+             Title="Sedes Corporativas"
+           >
+    <Grid RowDefinitions="*, Auto" Padding="20">
+
+        <ActivityIndicator IsRunning="{Binding Cargando}"
+              IsVisible="{Binding Cargando}"
+            
+              VerticalOptions="Center"
+              HorizontalOptions="Center"
+              Grid.Row="0" />
+
+
+        <CollectionView Grid.Row="0"
+                        ItemsSource="{Binding Sedes}"
+                        SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Sede">
+                    <Border 
+                           Margin="0,10" 
+                           Padding="15" 
+                          
+                           >
+
+                        <Grid ColumnDefinitions="Auto, *, Auto">
+
+                            <Border Grid.Column="0"
+                                   
+                                    StrokeShape="RoundRectangle 25"
+                                    HeightRequest="50"
+                                    WidthRequest="50"
+                                    Margin="0,0,15,0">
+                                <Label Text="🚩" 
+                                       FontSize="24" 
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="{Binding Nombre}" 
+                                       FontSize="18" 
+                                       FontAttributes="Bold" 
+                                      />
+                                <Label Text="Centro de Operaciones" 
+                                       FontSize="13" 
+                                      />
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="2" 
+                                   Text="Activa" 
+                                   FontSize="11"
+                                   FontAttributes="Bold"
+                                 
+                                   VerticalOptions="Center"
+                                   Padding="8,4"
+                                   />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="1" 
+                Text="ACTUALIZAR SEDES" 
+                Command="{Binding GetSedesCommand}" 
+                BackgroundColor="#2B6CB0"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="8"
+                HeightRequest="55"
+                Margin="5" />
+    </Grid>
+</ContentPage>

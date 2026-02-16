@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MauiEmpleados.ViewModels"
+             x:Class="MauiEmpleados.Views.SettingsPage"
+             x:DataType="viewmodels:SettingsViewModel"
+             Title="Configuración"
+            >
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="PREFERENCIAS" FontSize="12" FontAttributes="Bold"  Margin="5,10,0,0"/>
+
+            <Border Padding="15" StrokeShape="RoundRectangle 10">
+                <Grid ColumnDefinitions="*, Auto">
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label Text="Notificaciones" FontSize="16" FontAttributes="Bold" />
+                        <Label Text="Recibir alertas del sistema" FontSize="12" />
+                    </VerticalStackLayout>
+                    <Switch Grid.Column="1" IsToggled="{Binding RecibirNotificaciones}" OnColor="#2B6CB0"/>
+                </Grid>
+            </Border>
+
+            <Label Text="INFORMACIÓN" FontSize="12" FontAttributes="Bold"  Margin="5,10,0,0"/>
+
+            <Border  Padding="15" StrokeShape="RoundRectangle 10">
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="Versión" FontSize="16" TextColor="#2D3748"/>
+                        <Label Grid.Column="1" Text="{Binding VersionApp}" TextColor="#718096"/>
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="#EDF2F7"/>
+                    <Label Text="Términos y Condiciones" FontSize="16" TextColor="#2B6CB0"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Configuración de Tema de la app" 
+           FontSize="20" 
+           HorizontalOptions="Center" />
+
+            <Picker ItemsSource="{Binding Temas}"
+                        SelectedItem="{Binding TemaSeleccionado}"
+                        WidthRequest="250"
+                        HorizontalOptions="Center" />
+
+            <Button Text="Guardar cambios 💱"
+            Command="{Binding SaveSettingsCommand}"
+            WidthRequest="200"
+            HorizontalOptions="Center"
+            Margin="0,20" />
+
+            <Button Text="CERRAR SESIÓN" 
+                    BackgroundColor="Transparent" 
+                    TextColor="#E53E3E" 
+                    FontAttributes="Bold"
+                    Margin="0,30,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

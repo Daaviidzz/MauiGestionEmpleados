@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MauiEmpleados.Models"
+             xmlns:viewmodels="clr-namespace:MauiEmpleados.ViewModels"
+             x:Class="MauiEmpleados.Views.EmpleadosPage"
+             x:DataType="viewmodels:EmpleadosViewModel"
+             Title="Directorio Corporativo"
+           >
+    <Grid RowDefinitions="*, Auto" Padding="15">
+
+        <ActivityIndicator IsRunning="{Binding Cargando}"
+              IsVisible="{Binding Cargando}"
+             
+              VerticalOptions="Center"
+              HorizontalOptions="Center"
+              Grid.Row="0" />
+
+        <CollectionView Grid.Row="0"
+                ItemsSource="{Binding Empleados}"
+                SelectionMode="Single"
+                SelectionChangedCommand="{Binding IrADetallesCommand}"
+                SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Empleado">
+                    <Border 
+                           Margin="0,8" 
+                           Padding="12" 
+                           >
+
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Border Grid.Column="0"
+                                    
+                                    StrokeThickness="2"
+                                    StrokeShape="RoundRectangle 35"
+                                    HeightRequest="70"
+                                    WidthRequest="70">
+                                <Image Source="{Binding ImagenUri}"
+                                       Aspect="AspectFill" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" 
+                                                 Margin="15,0,0,0"
+                                                 VerticalOptions="Center">
+                                <Label Text="{Binding Nombre}" 
+                                       FontSize="18" 
+                                       FontAttributes="Bold" 
+                                        />
+                                <Label Text="{Binding Apellido}" 
+                                       FontSize="14" 
+                                       />
+                                <Label Text="Miembro del Equipo" 
+                                       FontSize="12" 
+                                      
+                                       Margin="0,2,0,0"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="1" 
+                Text="ACTUALIZAR DIRECTORIO" 
+                Command="{Binding GetEmpleadosCommand}" 
+              
+               
+                FontAttributes="Bold"
+                CornerRadius="8"
+                HeightRequest="55"
+                Margin="5" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:viewmodels="clr-namespace:MauiEmpleados.ViewModels"
+             x:Class="MauiEmpleados.Views.EstadisticasPage"
+             x:DataType="viewmodels:EstadisticasViewModel"
+             Title="Análisis Financiero"
+            >
+
+    <Grid Padding="20" RowDefinitions="Auto, Auto, *">
+
+        <Label Grid.Row="0" 
+               Text="Ganancias por Departamento" 
+               FontSize="22" FontAttributes="Bold" 
+             
+               HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+        <Button Grid.Row="1"
+                Text="🔄 Actualizar Gráfica"
+                Command="{Binding RecargarDatosCommand}"
+                
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20" />
+
+        <ActivityIndicator Grid.Row="2"
+                           IsRunning="{Binding EstaCargando}"
+                           IsVisible="{Binding EstaCargando}"
+                         
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+
+        <lvc:PieChart Grid.Row="2"
+                      Series="{Binding Series}"
+                      HeightRequest="400"
+                      HorizontalOptions="Fill"
+                      VerticalOptions="Fill"
+                      LegendPosition="Bottom"
+                       />
+    </Grid>
+</ContentPage>
